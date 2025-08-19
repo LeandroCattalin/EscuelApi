@@ -30,6 +30,8 @@ publish/
 appsettings.Development.json
 appsettings.json
 launchSettings.json
+EscuelApi.http
+EscuelApi.sln
 
 # Paquetes y dependencias de JavaScript/TypeScript
 node_modules/
