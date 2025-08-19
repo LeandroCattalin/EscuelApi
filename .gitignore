@@ -1,0 +1,45 @@
+# .gitignore para proyectos de ASP.NET Core
+
+# Carpetas de binarios y objetos temporales
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+
+# Paquetes NuGet y dependencias
+*.nupkg
+.vs/
+.vs/config/
+
+# Archivos de Visual Studio
+*.suo
+*.user
+*.userprefs
+*.vspscc
+*.vssscc
+
+# Carpeta de publicación
+publish/
+
+# Archivos temporales de depuración y logging
+*.log
+*.pbd
+*.pdb
+
+# Archivos de configuración de usuario local
+appsettings.Development.json
+appsettings.json
+launchSettings.json
+
+# Paquetes y dependencias de JavaScript/TypeScript
+node_modules/
+npm-debug.log*
+
+# Archivos de otros sistemas
+.DS_Store
+Thumbs.db
+
+# Archivos de paquetes de prueba y caché
+TestResults/
+.sonarlint/
+.sonarqube/
