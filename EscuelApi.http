@@ -1,6 +1,0 @@
-@EscuelApi_HostAddress = http://localhost:5216
-
-GET {{EscuelApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
