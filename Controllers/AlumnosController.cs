@@ -25,14 +25,24 @@ namespace EscuelApi.Controllers
         // Obtengo todos los alumnos en el GET /alumnos
         [HttpGet]
         // Funcion asyncrona para obtener todos los alumnos
-        public async Task<ActionResult<IEnumerable<Alumno>>> GetAlumnos()
+        public async Task<ActionResult<IEnumerable<AlumnoDto>>> GetAlumnos()
         {
-            return await _context.Alumnos.ToListAsync();
+            var alumnos = await _context.Alumnos.ToListAsync();
+            var alumnosDto = alumnos.Select(p => new AlumnoDto
+            {
+                Nombre = p.Nombre,
+                Apellido = p.Apellido,
+                Edad = p.Edad,
+                IdEscuela = p.IdEscuela,
+                Matricula = p.Matricula,
+                Carrera = p.Carrera,
+            }).ToList();
+            return Ok(alumnosDto);
         }
 
         // Obtengo todos los alumnos que tenga el mismo IdEscuela
         [HttpGet("escuela/{IdEscuela}")]
-        public async Task<ActionResult<IEnumerable<Alumno>>> GetAlumnosByEscuela(int IdEscuela)
+        public async Task<ActionResult<IEnumerable<AlumnoDto>>> GetAlumnosByEscuela(int IdEscuela)
         {
             // Utiliza LINQ para filtrar los alumnos por EscuelaId
             var alumnos = await _context.Alumnos
@@ -43,25 +53,46 @@ namespace EscuelApi.Controllers
             {
                 return NotFound();
             }
-            // Devolvemos los resultados
-            return alumnos;
+            var alumnosDto = alumnos.Select(p => new AlumnoDto
+            {
+                Nombre = p.Nombre,
+                Apellido = p.Apellido,
+                Edad = p.Edad,
+                IdEscuela = p.IdEscuela,
+                Matricula = p.Matricula,
+                Carrera = p.Carrera,
+            }).ToList();
+            return Ok(alumnosDto);
         }
         // Post para agregar un alumno en /alumnos
         [HttpPost]
         // Funcion asyncrona para crear alumno recibiendo de parametro un JSON con la estructura de Alumno
-        public async Task<ActionResult<Alumno>> CreateAlumno(Alumno alumno)
+        public async Task<ActionResult> CreateAlumno(CreateAlumnoDto alumnoDto)
         {
             // Verificamos que el objeto no sea nulo
-            if (alumno == null)
+            if (alumnoDto == null)
             {
                 return BadRequest();
             }
-            // Agrego al context el alumno que me pasaron como parametro
-            _context.Alumnos.Add(alumno);
+            var nuevoAlumno = new Alumno();
+            var propiedades = typeof(CreateAlumnoDto).GetProperties();
+            foreach (var prop in propiedades)
+            {
+                var valor = prop.GetValue(alumnoDto);
+                if (valor != null)
+                {
+                    var propAlumno = typeof(Alumno).GetProperty(prop.Name);
+                    if (propAlumno != null && propAlumno.CanWrite)
+                    {
+                        propAlumno.SetValue(nuevoAlumno, valor);
+                    }
+                }
+            }
+            _context.Alumnos.Add(nuevoAlumno);
             // Guardo en la db los cambios
             await _context.SaveChangesAsync();
             // Devuelvo el alumno creado
-            return CreatedAtAction(nameof(GetAlumnos), new { id = alumno.Id }, alumno);
+            return CreatedAtAction(nameof(GetAlumnos), new { id = nuevoAlumno.Id }, alumnoDto);
         }
         // Patch para editar alumnos en /alumnos/{id}
         [HttpPatch("{id}")]

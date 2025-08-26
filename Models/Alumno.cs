@@ -10,5 +10,8 @@ namespace EscuelApi.Models
             Matricula = matricula;
             Carrera = carrera;
         }
+        public Alumno()
+        {
+        }
     }
 }
