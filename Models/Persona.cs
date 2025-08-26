@@ -15,5 +15,8 @@ namespace EscuelApi.Models
             Apellido = apellido;
             Edad = edad;
         }
+        public Persona() : base()
+        {
+        }
     }
 }

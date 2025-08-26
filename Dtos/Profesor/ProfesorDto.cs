@@ -1,6 +1,6 @@
 namespace EscuelApi.Dtos.Profesor
 {
-    public class UpdateProfesorDto
+    public class ProfesorDto
     {
         public string? Nombre { get; set; }
         public string? Apellido { get; set; }
