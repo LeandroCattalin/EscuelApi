@@ -29,7 +29,7 @@ namespace EscuelApi.Controllers
                 Nombre = p.Nombre,
                 Apellido = p.Apellido,
                 Edad = p.Edad,
-                IdEscuela = p.IdEscuela,
+                EscuelaId = p.EscuelaId,
                 Asignatura = p.Asignatura,
                 Experiencia = p.Experiencia
             }).ToList();
@@ -50,7 +50,7 @@ namespace EscuelApi.Controllers
                 Nombre = profesor.Nombre,
                 Apellido = profesor.Apellido,
                 Edad = profesor.Edad,
-                IdEscuela = profesor.IdEscuela,
+                EscuelaId = profesor.EscuelaId,
                 Asignatura = profesor.Asignatura,
                 Experiencia = profesor.Experiencia
             };

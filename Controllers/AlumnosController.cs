@@ -33,20 +33,20 @@ namespace EscuelApi.Controllers
                 Nombre = p.Nombre,
                 Apellido = p.Apellido,
                 Edad = p.Edad,
-                IdEscuela = p.IdEscuela,
+                EscuelaId = p.EscuelaId,
                 Matricula = p.Matricula,
                 Carrera = p.Carrera,
             }).ToList();
             return Ok(alumnosDto);
         }
 
-        // Obtengo todos los alumnos que tenga el mismo IdEscuela
-        [HttpGet("escuela/{IdEscuela}")]
-        public async Task<ActionResult<IEnumerable<AlumnoDto>>> GetAlumnosByEscuela(int IdEscuela)
+        // Obtengo todos los alumnos que tenga el mismo EscuelaId
+        [HttpGet("escuela/{EscuelaId}")]
+        public async Task<ActionResult<IEnumerable<AlumnoDto>>> GetAlumnosByEscuela(int EscuelaId)
         {
             // Utiliza LINQ para filtrar los alumnos por EscuelaId
             var alumnos = await _context.Alumnos
-                                        .Where(a => a.IdEscuela == IdEscuela)
+                                        .Where(a => a.EscuelaId == EscuelaId)
                                         .ToListAsync();
             // Verificamos si se encontraron alumnos
             if (alumnos == null || !alumnos.Any())
@@ -58,7 +58,7 @@ namespace EscuelApi.Controllers
                 Nombre = p.Nombre,
                 Apellido = p.Apellido,
                 Edad = p.Edad,
-                IdEscuela = p.IdEscuela,
+                EscuelaId = p.EscuelaId,
                 Matricula = p.Matricula,
                 Carrera = p.Carrera,
             }).ToList();

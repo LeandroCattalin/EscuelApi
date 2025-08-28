@@ -4,8 +4,8 @@ namespace EscuelApi.Models
     {
         public string Asignatura { get; set; } = string.Empty;
         public int? Experiencia { get; set; }
-        public Profesor(int id, int idEscuela, string? nombre, string? apellido, int? edad, string asignatura, int? experiencia)
-            : base(id, idEscuela, nombre, apellido, edad)
+        public Profesor(int id, int escuelaId, string? nombre, string? apellido, int? edad, string asignatura, int? experiencia)
+            : base(id, escuelaId, nombre, apellido, edad)
         {
             Asignatura = asignatura;
             Experiencia = experiencia;
